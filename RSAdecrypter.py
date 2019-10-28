@@ -53,9 +53,11 @@ def decrypt(d: int, n: int):
     Splits = msg.split( )
     to_print = ""
     for s in Splits:
+        print(str(s))
         # s^d mod n = dmsg
         # s is what we want to decrypt, d is the key
         dmsg = (int(s) ** d) % (n)
+        print(str(dmsg))
         to_print += str(alpha.get(dmsg))
     print(to_print)
 
