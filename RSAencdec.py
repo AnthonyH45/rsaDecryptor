@@ -7,11 +7,11 @@ https://www.geeksforgeeks.org/multiplicative-inverse-under-modulo-m/
 thanks to them for the mod_inverse function!
 I DID NOT WRITE THIS FUNCTION, I DO NOT CLAIM ANYTHING
 '''
-def mod_inv(e: int, phi: int): 
-    e = e % phi; 
+def mod_inv(e: int, phi: int):
+    e = e % phi;
     for i in range(1, int(phi)):
         # make sure that e does not share any divisors with phi
-        if e * i % phi == 1: 
+        if e * i % phi == 1:
             return i
     return 1
 
@@ -45,16 +45,18 @@ def decrypt_file(d: int, n: int, file_name: str):
 
 def encrypt_file(e: int, n: int, file_name: str):
     alpha = {2: 'A', 3: 'B', 4: 'C', 5: 'D', 6: 'E', 7: 'F', 8: 'G', 9: 'H', 10: 'I', 11: 'J', 12: 'K', 13: 'L', 14: 'M', 15: 'N', 16: 'O', 17: 'P', 18: 'Q', 19: 'R', 20: 'S', 21: 'T', 22: 'U', 23: 'V', 24: 'W', 25: 'X', 26: 'Y', 27: 'Z', 28: ' ' }
-    # one way to invert the key/values in the dict,  
+    # one way to invert the key/values in the dict,
     alpha = {v: k for k, v in alpha.items()}
     # another way,  dict(alpha(reversed, alpha.items()))
     msg = open(file_name, 'r')
     msg = str(msg.read())
-    Splits = msg.splits ( )
     to_print = ""
-    for s in Splits:
-        emsg = (int(s) ** e) % (n)
-        to_print += str(alpha.get(emsg))
+    char_msg = list(msg)
+    del char_msg[-1]
+    for s in char_msg:
+        print(alpha.get(s.upper()))
+        emsg = ((alpha.get(s.upper())) ** e) % (n)
+        to_print += (str(emsg) + " ")
     print(to_print)
     file_name += "_encrypted"
     to_write = open(file_name, "w+")
@@ -69,7 +71,7 @@ def find_d(p, q, e):
     #print("(",p-1,")(",q-1,") : ", phi)
     #print("d = ", d)
     return d #decrypt(d, (p*q))
-    
+
 def main():
     print("This program assumes that A->2,B->3,...,Z->27,\' \'->28\nIf this is not the case, please modify the program accordingly")
     user_choice = str(input("Do you want to (e)ncrypt or (d)ecrypt? "))
@@ -99,4 +101,3 @@ def main():
         decrypt_file(d, n, file_name)
 
 main()
-
