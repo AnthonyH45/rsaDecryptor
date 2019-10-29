@@ -52,9 +52,8 @@ def encrypt_file(e: int, n: int, file_name: str):
     msg = str(msg.read())
     to_print = ""
     char_msg = list(msg)
-    del char_msg[-1]
     for s in char_msg:
-        print(alpha.get(s.upper()))
+        # print(alpha.get(s.upper()))
         emsg = ((alpha.get(s.upper())) ** e) % (n)
         to_print += (str(emsg) + " ")
     print(to_print)
