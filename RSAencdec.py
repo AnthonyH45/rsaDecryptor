@@ -15,6 +15,13 @@ def mod_inv(e: int, phi: int):
             return i
     return 1
 
+'''
+From mathexchange, Gauss's algorithm:
+a^-1 == a^(phi-1) mod n
+'''
+def mod_inv(e: int, phi: int, n: int):
+    return ((e ** (phi-1)) % n)
+
 def find_pq(n: int):
     for i in range(2, int(math.sqrt(n))):
         if n % i == 0:
@@ -63,12 +70,12 @@ def encrypt_file(e: int, n: int, file_name: str):
     print("Written to the file name you gave but added \'_encrypted\' to the end of it")
 
 def find_d(p, q, e):
-    #print("\nUsing",p,",",q,", &",e,"to find d via the following formula: de = 1 mod((p-1)(q-1))")
+    print("\nUsing",p,",",q,", &",e,"to find d via the following formula: de = 1 mod((p-1)(q-1))")
     phi = (p-1) * (q-1)
     # de = 1 mod((p-1)(q-1))
     d = mod_inv(e, phi)
-    #print("(",p-1,")(",q-1,") : ", phi)
-    #print("d = ", d)
+    print("(",p-1,")(",q-1,") : ", phi)
+    print("d = ", d)
     return d #decrypt(d, (p*q))
 
 def main():

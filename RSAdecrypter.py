@@ -38,14 +38,60 @@ taken from
 https://www.geeksforgeeks.org/multiplicative-inverse-under-modulo-m/
 thanks to them for the mod_inverse function!
 I DID NOT WRITE THIS FUNCTION, I DO NOT CLAIM ANYTHING
+
+EDIT: October 29, 2019
+Danial Beg showed us that we could improve this function
+as Prof. Elena suggested by changing our if statement to the following
+if (((phi * i)+1) % e) == 0
 '''
-def mod_inv(e: int, phi: int): 
-    e = e % phi; 
+def mod_inv(a: int, m: int):
+# Iterative Python 3 program to find 
+# modular inverse using extended 
+# Euclid algorithm 
+  
+# Returns modulo inverse of a with 
+# respect to m using extended Euclid 
+# Algorithm Assumption: a and m are 
+# coprimes, i.e., gcd(a, m) = 1 
+    m0 = m 
+    y = 0
+    x = 1
+  
+    if (m == 1) : 
+        return 0
+  
+    while (a > 1) : 
+  
+        # q is quotient 
+        q = a // m 
+  
+        t = m 
+  
+        # m is remainder now, process 
+        # same as Euclid's algo 
+        m = a % m 
+        a = t 
+        t = y 
+  
+        # Update x and y 
+        y = x - q * y 
+        x = t 
+  
+  
+    # Make x positive 
+    if (x < 0) : 
+        x = x + m0 
+  
+    return x 
+  
+  
+# This code is contributed by Nikita tiwari. 
+'''
     for i in range(1, int(phi)):
-        # make sure that e does not share any divisors with phi
-        if e * i % phi == 1: 
+        if e * i % phi - 1 == 0:
             return i
     return 1
+'''
 
 def decrypt(d: int, n: int):
     alpha = {2: 'A', 3: 'B', 4: 'C', 5: 'D', 6: 'E', 7: 'F', 8: 'G', 9: 'H', 10: 'I', 11: 'J', 12: 'K', 13: 'L', 14: 'M', 15: 'N', 16: 'O', 17: 'P', 18: 'Q', 19: 'R', 20: 'S', 21: 'T', 22: 'U', 23: 'V', 24: 'W', 25: 'X', 26: 'Y', 27: 'Z', 28: ' ' }
